@@ -123,3 +123,10 @@ RegisterServerEvent('instance:invite')
 AddEventHandler('instance:invite', function(instance, type, player, data)
 	InvitePlayerToInstance(instance, type, player, data)
 end)
+
+AddEventHandler('playerDropped', function(reason)
+    local _source = source
+    if instances[_source] ~= nil then
+        CloseInstance(_source)
+    end
+end)
