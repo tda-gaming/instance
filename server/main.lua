@@ -3,9 +3,9 @@ local instances = {}
 function GetInstancedPlayers()
 	local players = {}
 
-	for k,v in pairs(instances) do
-		for k2,v2 in ipairs(v.players) do
-			players[v2] = true
+	for _,v in pairs(instances) do
+		for i=1, #v.players do
+			players[v.players[i]] = true
 		end
 	end
 

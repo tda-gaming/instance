@@ -176,16 +176,24 @@ Citizen.CreateThread(function()
 		if instance.host then
 			-- Get players and sets them as pairs
 			for k,v in ipairs(GetActivePlayers()) do
-				playersToHide[v] = true
+				if v ~= -1 then
+					playersToHide[v] = true
+				end
 			end
 
 			-- Dont set our instanced players invisible
 			for _,player in ipairs(instance.players) do
-				playersToHide[GetPlayerFromServerId(player)] = nil
+				local _player = GetPlayerFromServerId(player)
+				if _player ~= -1 then
+					playersToHide[GetPlayerFromServerId(player)] = nil
+				end
 			end
 		else
 			for player,_ in pairs(instancedPlayers) do
-				playersToHide[GetPlayerFromServerId(player)] = true
+				local _player = GetPlayerFromServerId(player)
+				if player ~= -1 and NetworkIsPlayerActive(_player) then
+					playersToHide[GetPlayerFromServerId(player)] = true
+				end
 			end
 		end
 	end
